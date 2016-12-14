@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1481699710 source:/home/santhosh/Documents/Codeblocks/LinkedList/main.cpp
+	<iostream>
+	<iostream>
+	"Node.cpp"
+	<iostream>
+	"Node.h"
+

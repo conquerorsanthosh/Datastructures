@@ -45,17 +45,46 @@ class llist
 
         }
         Node* get_root(){return this->root;};
+        void  set_root(Node*head){root=head;}
         void  insert_node(Node* data_node);
         void  delete_node(Node* data_node);
         void  print_list();
         void  delete_complete_list();
+        Node*  reverse_list(Node*head);
         virtual ~llist()
         {
-            delete_complete_list();
+            //delete_complete_list();
         }
 
 };
 
+Node* llist::reverse_list(Node*head)
+{
+    if(head->next==nullptr)
+    {
+        set_root(head);
+        return head;
+
+    }
+    Node *previous=reverse_list(head->next);
+
+    previous->next=head;
+    head->next=nullptr;
+    return head;
+
+}
+void llist::print_list()
+{
+    Node* head=get_root();
+    while(head)
+    {
+        cout<<head->data;
+        cout<<"->";
+        head=head->next;
+    }
+    cout<<"NULL";
+    cout<<endl;
+}
 void llist::insert_node(Node* data_node)
 {
 
@@ -64,7 +93,7 @@ void llist::insert_node(Node* data_node)
     if(head==nullptr)
     {
 
-        head=data_node;
+        set_root(data_node);
 
     }
 
@@ -76,7 +105,6 @@ void llist::insert_node(Node* data_node)
         {
             current=current->next;
         }
-
         current->next=data_node;
 
     }
@@ -85,7 +113,16 @@ void llist::insert_node(Node* data_node)
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    llist mylist;
+    mylist.insert_node(new Node(10));
+    mylist.insert_node(new Node(40));
+    mylist.insert_node(new Node(50));
+    mylist.insert_node(new Node(60));
+    mylist.insert_node(new Node(70));
+    mylist.insert_node(new Node(80));
+    mylist.print_list();
+    mylist.reverse_list(mylist.get_root());
+    mylist.print_list();
     return 0;
 }
 
